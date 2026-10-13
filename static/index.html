@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f5f2">
+    <title>Dalux Scanner</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="connection-rail" aria-label="Dalux connection">
+        <a class="brand" href="/" aria-label="Dalux Scanner home">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <span class="brand-name">Dalux<span>Scanner</span></span>
+        </a>
+
+        <div class="rail-heading">
+          <span class="eyebrow">Connection</span>
+          <span id="connection-state" class="connection-state"><i></i> Not connected</span>
+        </div>
+
+        <form id="connection-form" class="connection-form">
+          <label for="base-url">API base URL</label>
+          <input id="base-url" name="baseUrl" type="url" value="https://node2.field.dalux.com/service/api" autocomplete="url" required>
+
+          <label for="api-key">API key</label>
+          <input id="api-key" name="apiKey" type="password" placeholder="Paste API identity key" autocomplete="off" required>
+          <p class="field-note">The key is held only while this page is open.</p>
+
+          <button id="connect-button" class="button button-primary" type="submit">Connect to Dalux</button>
+        </form>
+
+        <div class="rail-footnote">
+          <span class="footnote-mark" aria-hidden="true"></span>
+          <p>Read-only access<br>Dalux Build API 4.15</p>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <div class="breadcrumb-label">DALUX BUILD <span>/</span> FILE EXPLORER</div>
+            <h1>Project files</h1>
+          </div>
+          <div class="topbar-actions">
+            <span id="project-count" class="quiet-count">No projects loaded</span>
+            <button id="refresh-button" class="button button-light" type="button" disabled>Refresh</button>
+          </div>
+        </header>
+
+        <section class="browser-toolbar" aria-label="Project and file area">
+          <div class="select-wrap project-select-wrap">
+            <label for="project-select">Project</label>
+            <select id="project-select" disabled>
+              <option value="">Connect to load projects</option>
+            </select>
+          </div>
+          <div class="areas-wrap">
+            <span class="control-label">File area</span>
+            <div id="area-tabs" class="area-tabs" role="tablist" aria-label="File areas">
+              <span class="area-empty">Choose a project</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="browser" aria-label="Project file browser">
+          <div class="file-browser">
+            <div class="browser-heading">
+              <nav id="breadcrumbs" class="breadcrumbs" aria-label="Folder location">
+                <span class="crumb-muted">No folder selected</span>
+              </nav>
+              <label class="search-box" for="file-search">
+                <span class="search-symbol" aria-hidden="true"></span>
+                <input id="file-search" type="search" placeholder="Search this folder" disabled>
+              </label>
+            </div>
+
+            <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+            <div class="table-scroll">
+              <table class="file-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Modified</th>
+                    <th scope="col" class="size-column">Size</th>
+                  </tr>
+                </thead>
+                <tbody id="file-rows">
+                  <tr class="placeholder-row"><td colspan="4">Connect to Dalux to browse project files.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <footer class="list-footer">
+              <span id="visible-count">Waiting for connection</span>
+              <span id="area-summary"></span>
+            </footer>
+          </div>
+
+          <aside id="details-panel" class="details-panel" aria-label="Selected file details">
+            <div class="details-empty">
+              <span class="detail-rule"></span>
+              <span class="eyebrow">File details</span>
+              <h2>Select a file</h2>
+              <p>File IDs and available metadata will appear here.</p>
+            </div>
+          </aside>
+        </section>
+        <div class="workspace-bottom"><span>DALUX SCANNER</span><span>API connection is read-only</span></div>
+      </main>
+    </div>
+  </body>
+</html>
